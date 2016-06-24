@@ -18,6 +18,11 @@ NSString *const IDENTIFIER = @"CELL";
 
 @implementation SkyAssociationMenuView
 
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    NSAssert(false, @"cann't not use - initWithCoder:, please user - init");
+    return nil;
+}
+
 - (instancetype)init
 {
     self = [super init];
@@ -46,6 +51,7 @@ NSString *const IDENTIFIER = @"CELL";
         bgView.backgroundColor = [UIColor colorWithRed:.0f green:.0f blue:.0f alpha:.3f];
         bgView.userInteractionEnabled = YES;
         [bgView addSubview:[tables objectAtIndex:0] ];
+        
     }
     return self;
 }
@@ -112,7 +118,9 @@ NSString *const IDENTIFIER = @"CELL";
 }
 
 - (void)showAsDrawDownView:(UIView *)view {
+    UIWindow *window = [[UIApplication sharedApplication] keyWindow];
     CGRect showFrame = view.frame;
+    showFrame = [view.superview convertRect:showFrame toView:window];
     CGFloat x = 0.f;
     CGFloat y = showFrame.origin.y+showFrame.size.height;
     CGFloat w = SCREEN_WIDTH;
@@ -124,13 +132,13 @@ NSString *const IDENTIFIER = @"CELL";
     [self loadSels];
     [self adjustTableViews];
     if(!self.superview) {
-        [[[UIApplication sharedApplication] keyWindow] addSubview:self];
+        [window addSubview:self];
         self.alpha = .0f;
         [UIView animateWithDuration:.25f animations:^{
             self.alpha = 1.0f;
         }];
     }
-    [[[UIApplication sharedApplication] keyWindow] bringSubviewToFront:self];
+    [window bringSubviewToFront:self];
 }
 
 - (void)dismiss{

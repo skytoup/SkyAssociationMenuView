@@ -102,6 +102,10 @@
     NSInteger sels[3];
 }
 extern __strong NSString *const IDENTIFIER;
+
+- (instancetype)initWithFrame:(CGRect)frame __attribute__((availability(ios, introduced=1.0,deprecated=1.0,obsoleted=1.0)));
+- (instancetype)initWithCoder:(NSCoder *)aDecoder __attribute__((availability(ios, introduced=1.0,deprecated=1.0,obsoleted=1.0)));
+
 @property (weak,nonatomic) id<SkyAssociationMenuViewDelegate> delegate;
 /**
  *  设置选中项，-1为未选中
